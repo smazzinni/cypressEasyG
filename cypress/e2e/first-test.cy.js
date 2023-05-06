@@ -43,7 +43,8 @@ describe("Task page", () => {
   });
 
   it("cypress iFrame Handle", function () {
-    cy.get("iframe");
+    // cy.get("iframe");
+    alertEle.readfilefromtask();
     // TaskPage.getIframeBody().find('#app div.homepage-header-container  div.cta > a').should('have.text', 'Try it').click()
     // TaskPage.getIframeBody().find('#auth-page-container h1').should('have.text', 'Start creating courses now')
   });
