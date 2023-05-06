@@ -38,6 +38,5 @@ class TaskPage {
       .contains("Reload")
       .click();
   }
-
 }
 export default new TaskPage();
