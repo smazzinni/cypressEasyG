@@ -9,6 +9,7 @@
     "prettier": "prettier --write \"cypress/**/*.{js,ts}\""
   },
   "author": "",
+
   "license": "ISC",
   "devDependencies": {
     "cypress": "^12.11.0",

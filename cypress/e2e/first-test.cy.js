@@ -5,7 +5,7 @@ import "cypress-real-events/support";
 import "cypress-iframe";
 
 describe("Task page", () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit("http://localhost:8080/task.html");
   });
 
@@ -43,15 +43,23 @@ describe("Task page", () => {
   });
 
   it("cypress iFrame Handle", function () {
-    // cy.get("iframe");
-    alertEle.readfilefromtask();
-    // TaskPage.getIframeBody().find('#app div.homepage-header-container  div.cta > a').should('have.text', 'Try it').click()
-    // TaskPage.getIframeBody().find('#auth-page-container h1').should('have.text', 'Start creating courses now')
+    cy.get("#courses-iframe")
+      .should("be.visible")
+      .should("not.be.empty")
+      .then(($iframe) => {
+        const $body = $iframe.contents().find("body");
+
+        cy.wrap($body).find(".hp-cta").should("be.visible");
+      });
   });
 
   it("Open new tab windows", function () {
-    cy.get("#opentab").invoke("removeAttr", "target").click();
-    cy.wait(30000);
+    cy.get("button#opentab").invoke("removeAttr", "target").click();
+    // cy.get('button#opentab').should('have.attr', 'href', 'www.easygenerator.com') // no page load!
+    cy.origin("www.easygenerator.com", () => {
+      cy.url().should("contain", "www.easygenerator.com");
+    });
+
     cy.go("back");
   });
 });
